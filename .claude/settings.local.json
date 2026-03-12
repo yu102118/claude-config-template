@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx skills:*)",
+      "Bash(chmod +x \"C:/Users/User/OneDrive/Рабочий стол/UniSave/.claude/hooks/task-completed.sh\" \"C:/Users/User/OneDrive/Рабочий стол/UniSave/.claude/hooks/teammate-idle.sh\")",
+      "Bash(cd \"C:/Users/User/OneDrive/Рабочий стол/UniSave\" && python -c \"import sentence_transformers; print\\('already installed:', sentence_transformers.__version__\\)\" 2>&1 || echo \"NOT_INSTALLED\")",
+      "Bash(cd \"C:/Users/User/OneDrive/Рабочий стол/UniSave\" && pip install \"sentence-transformers>=2.7\" --quiet 2>&1 | tail -5)",
+      "Bash(cd \"C:/Users/User/OneDrive/Рабочий стол/UniSave\" && python -c \"import sentence_transformers; print\\('installed:', sentence_transformers.__version__\\)\")",
+      "Bash(cd \"C:/Users/User/OneDrive/Рабочий стол/UniSave\" && python manage.py makemigrations core 2>&1)",
+      "Bash(cd \"C:/Users/User/OneDrive/Рабочий стол/UniSave\" && python manage.py migrate 2>&1)",
+      "Bash(cd \"C:/Users/User/OneDrive/Рабочий стол/UniSave\" && python -c \"\nimport django, os\nos.environ.setdefault\\('DJANGO_SETTINGS_MODULE', 'unisave.settings'\\)\ndjango.setup\\(\\)\n\nfrom core.services.embeddings import embed_query, embed_texts\n\n# Test query embedding\nvec = embed_query\\('What is osmosis?'\\)\nprint\\('Query embedding dim:', len\\(vec\\)\\)\nprint\\('First 5 values:', [round\\(v, 4\\) for v in vec[:5]]\\)\n\n# Test batch\nvecs = embed_texts\\(['Osmosis is the movement of water', 'Photosynthesis converts light to energy']\\)\nprint\\('Batch count:', len\\(vecs\\), '| dim:', len\\(vecs[0]\\)\\)\nprint\\('Dot product \\(should be low, different topics\\):', round\\(sum\\(a*b for a,b in zip\\(vecs[0], vecs[1]\\)\\), 4\\)\\)\n\" 2>&1 | grep -v FutureWarning | grep -v \"google.generativeai\" | grep -v \"^$\" | grep -v \"All support\" | grep -v \"updates or bug\" | grep -v \"Please switch\" | grep -v \"See README\" | grep -v \"https://\" | grep -v \"import google\")",
+      "Bash(cd \"C:/Users/User/OneDrive/Рабочий стол/UniSave\" && python -c \"\nimport django, os\nos.environ.setdefault\\('DJANGO_SETTINGS_MODULE', 'unisave_backend.settings'\\)\ndjango.setup\\(\\)\n\nfrom core.services.embeddings import embed_query, embed_texts\n\nvec = embed_query\\('What is osmosis?'\\)\nprint\\('Query embedding dim:', len\\(vec\\)\\)\nprint\\('First 5 values:', [round\\(v, 4\\) for v in vec[:5]]\\)\n\nvecs = embed_texts\\(['Osmosis is the movement of water', 'Photosynthesis converts light to energy']\\)\nprint\\('Batch count:', len\\(vecs\\), '| dim:', len\\(vecs[0]\\)\\)\nprint\\('Cross-topic dot product:', round\\(sum\\(a*b for a,b in zip\\(vecs[0], vecs[1]\\)\\), 4\\)\\)\n\" 2>&1 | grep -Ev \"\\(FutureWarning|google\\\\.generativeai|All support|updates or bug|Please switch|See README|https://|import google|WARNINGS|staticfiles\\)\")"
+    ]
+  }
+}
